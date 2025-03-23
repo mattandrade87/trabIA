@@ -34,15 +34,18 @@ def classificar_cor(rgb):
     v *= 100
 
     # Limiares para classificação
-    LIMIAR_SATURACAO = 20  # Cores abaixo são consideradas cinza
-    LIMIAR_VALOR_CLARO = 90  # Valor para diferenciar cinza claro/escuro
+    LIMIAR_SATURACAO = 15  # Cores abaixo são consideradas cinza
+    LIMIAR_VALOR_CLARO = 70  # Valor para diferenciar cinza claro/escuro
+    LIMIAR_VALOR_ESCURO = 40  # Valor para diferenciar cinza escuro
 
     # Classificação de cores
     if s < LIMIAR_SATURACAO:
         if v > LIMIAR_VALOR_CLARO:
-            return (211, 211, 211)  # Cinza claro
+            return (166, 166, 166)  # Cinza claro
+        elif v > LIMIAR_VALOR_ESCURO:
+            return (128, 128, 128)  # Cinza médio
         else:
-            return (128, 128, 128)  # Cinza médio/escuro
+            return (64, 64, 64)     # Cinza escuro
     else:
         if (h < 15 or h >= 345):  # Vermelho
             return (255, 0, 0)
@@ -50,7 +53,7 @@ def classificar_cor(rgb):
             return (255, 165, 0)
         elif 200 <= h < 270:  # Azul
             return (0, 0, 255)
-        else:  # Cor não mapeada (default para cinza)
+        else:  # Cor não mapeada (default para cinza médio)
             return (128, 128, 128)
 
 def cor_predominante(quadrado):
@@ -78,7 +81,7 @@ resultados = processar_imagem(caminho_imagem)
 for posicao, cor in resultados:
     print(f"Posição [i, j]: {posicao}, Cor categorizada: {cor}")
 
-
+# Salvar resultados em arquivo
 with open("resultado.txt", "w") as file:
     for item in resultados:
         file.write(str(item) + "\n") 
