@@ -73,15 +73,44 @@ def processar_imagem(caminho_imagem, linhas=42, colunas=42):
     
     return resultados
 
+def rgb_to_color_name(rgb):
+    """Converte valores RGB para o nome da cor correspondente."""
+    r, g, b = rgb
+    if rgb == (255, 0, 0):
+        return "Vermelho"
+    elif rgb == (255, 165, 0):
+        return "Laranja"
+    elif rgb == (0, 0, 255):
+        return "Azul"
+    elif rgb in [(166, 166, 166), (128, 128, 128)]:
+        return "Cinza"
+    elif rgb == (64, 64, 64):
+        return "Cinza Escuro"
+    else:
+        return "Desconhecida"
+
 # Exemplo de uso
 caminho_imagem = "image2.png"
 resultados = processar_imagem(caminho_imagem)
 
 # Exibir resultados
 for posicao, cor in resultados:
-    print(f"Posição [i, j]: {posicao}, Cor categorizada: {cor}")
+    print(f"Posicao: {posicao}, Cor: {rgb_to_color_name(cor)}")
+
+
 
 # Salvar resultados em arquivo
 with open("resultado.txt", "w") as file:
-    for item in resultados:
-        file.write(str(item) + "\n") 
+    for posicao, cor in resultados:
+        file.write(f"Posicao: {posicao}, Cor: {rgb_to_color_name(cor)}\n") 
+
+
+
+print("--------------------------------")
+posicao_desejada = (35, 7)
+for posicao, cor in resultados:
+    if posicao == posicao_desejada:
+        print(f"Posição {posicao_desejada}:")
+        print(f"Cor RGB: {cor}")
+        print(f"Nome da cor: {rgb_to_color_name(cor)}")
+        break
