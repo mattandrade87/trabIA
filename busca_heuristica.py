@@ -74,27 +74,25 @@ def a_star(start, goal, resultados, grid_size):
 
 def encontrar_melhor_rota():
     """Encontra a melhor rota para coletar todos os personagens e chegar à saída."""
-    # Carrega a matriz de navegação
     resultados = processar_imagem("image2.png")
     grid_size = (42, 42)  # Tamanho da grade
+
+    # Lista de pontos a visitar (somente os personagens)
+    pontos_personagens = [posicaoMike, posicaoLucas, posicaoDustin, posicaoWill]
     
-    # Lista de pontos a visitar
-    pontos = [posicaoMike, posicaoLucas, posicaoDustin, posicaoWill, posicaoSaida]
-    
-    # Posição inicial
+    # Posição inicial (posição da Eleven)
     posicao_atual = posicaoEleven
     rota_completa = [posicao_atual]
     custo_total = 0
     
-    # Encontra o melhor caminho para cada ponto
-    pontos_restantes = pontos.copy()
-    while pontos_restantes:
+    # Encontra o melhor caminho para cada personagem
+    while pontos_personagens:
         melhor_caminho = None
         melhor_custo = float('inf')
         melhor_ponto = None
         
         # Testa cada ponto restante para encontrar o melhor próximo destino
-        for ponto in pontos_restantes:
+        for ponto in pontos_personagens:
             caminho, custo = a_star(posicao_atual, ponto, resultados, grid_size)
             if caminho and custo < melhor_custo:
                 melhor_caminho = caminho
@@ -106,10 +104,16 @@ def encontrar_melhor_rota():
             rota_completa.extend(melhor_caminho[1:])
             custo_total += melhor_custo
             posicao_atual = melhor_ponto
-            pontos_restantes.remove(melhor_ponto)
+            pontos_personagens.remove(melhor_ponto)
         else:
             break
-    
+
+    # Após coletar todos os personagens, adiciona o caminho até a saída
+    caminho_saida, custo_saida = a_star(posicao_atual, posicaoSaida, resultados, grid_size)
+    if caminho_saida:
+        rota_completa.extend(caminho_saida[1:])
+        custo_total += custo_saida
+
     return rota_completa, custo_total
 
 def main():
