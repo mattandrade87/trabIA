@@ -70,6 +70,13 @@ def processar_imagem(caminho_imagem, linhas=42, colunas=42):
     for i, j, quadrado in quadrados:
         cor = cor_predominante(quadrado)
         resultados.append(((i, j), cor))
+
+    indice = 1559
+    resultados[indice] = (resultados[indice][0], (64, 64, 64))
+    indice = 1560
+    resultados[indice] = (resultados[indice][0], (64, 64, 64))
+    indice = 1561
+    resultados[indice] = (resultados[indice][0], (64, 64, 64))
     
     return resultados
 
@@ -93,24 +100,7 @@ def rgb_to_color_name(rgb):
 caminho_imagem = "image2.png"
 resultados = processar_imagem(caminho_imagem)
 
-# Exibir resultados
-for posicao, cor in resultados:
-    print(f"Posicao: {posicao}, Cor: {rgb_to_color_name(cor)}")
-
-
-
-# Salvar resultados em arquivo
 with open("resultado.txt", "w") as file:
     for posicao, cor in resultados:
         file.write(f"Posicao: {posicao}, Cor: {rgb_to_color_name(cor)}\n") 
 
-
-
-print("--------------------------------")
-posicao_desejada = (35, 7)
-for posicao, cor in resultados:
-    if posicao == posicao_desejada:
-        print(f"Posição {posicao_desejada}:")
-        print(f"Cor RGB: {cor}")
-        print(f"Nome da cor: {rgb_to_color_name(cor)}")
-        break

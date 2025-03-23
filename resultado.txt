@@ -1557,9 +1557,9 @@ Posicao: (37, 1), Cor: Cinza Escuro
 Posicao: (37, 2), Cor: Cinza Escuro
 Posicao: (37, 3), Cor: Cinza Escuro
 Posicao: (37, 4), Cor: Cinza Escuro
-Posicao: (37, 5), Cor: Azul
-Posicao: (37, 6), Cor: Azul
-Posicao: (37, 7), Cor: Azul
+Posicao: (37, 5), Cor: Cinza Escuro
+Posicao: (37, 6), Cor: Cinza Escuro
+Posicao: (37, 7), Cor: Cinza Escuro
 Posicao: (37, 8), Cor: Cinza Escuro
 Posicao: (37, 9), Cor: Cinza Escuro
 Posicao: (37, 10), Cor: Cinza Escuro
